@@ -24,6 +24,9 @@ public class SoundManager : MonoBehaviour
         audioClips.Add(Resources.Load<AudioClip>("Audio/hurt-sound"));
         audioClips.Add(Resources.Load<AudioClip>("Audio/death-sound"));
         audioClips.Add(Resources.Load<AudioClip>("Audio/bullet-sound"));
+        audioClips.Add(Resources.Load<AudioClip>("Audio/Grow"));
+        audioClips.Add(Resources.Load<AudioClip>("Audio/Shrink"));
+        audioClips.Add(Resources.Load<AudioClip>("Audio/Gem"));
 
         // Pre-Load Music
         audioClips.Add(Resources.Load<AudioClip>("Audio/main-soundtrack"));

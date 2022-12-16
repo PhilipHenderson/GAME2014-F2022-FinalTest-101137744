@@ -9,6 +9,17 @@ public class ShrinkingPlatformScript : MonoBehaviour
     public float shrinkSpeed;
     public bool onPlatform;
 
+    private Vector3 originalScale;
+    private Vector3 originalTransform;
+    private SoundManager soundManager;
+
+    private void Start()
+    {
+        originalScale = transform.localScale;
+        soundManager = FindObjectOfType<SoundManager>();
+    }
+
+
     public void OnCollisionEnter2D(Collision2D other)
     {
         onPlatform = true;
@@ -23,23 +34,35 @@ public class ShrinkingPlatformScript : MonoBehaviour
     {
         if (onPlatform == true)
         {
-
-            Shrinking();
+            Shrink();
+        }
+        else
+        {
+            Grow();
         }
     }
 
-    private void Shrinking()
+
+    private void Shrink()
     {
         if (transform.localScale.x > 0 || transform.localScale.y > 0)
         {
             transform.localScale = new Vector3(transform.localScale.x - shrinkFactor * shrinkSpeed * Time.deltaTime,
-                                            transform.localScale.y - shrinkFactor * shrinkSpeed * Time.deltaTime);
-        }
-        if (transform.localScale.x < 0)
-        {
-            Destroy(gameObject);
+                                                   transform.localScale.y - shrinkFactor * shrinkSpeed * Time.deltaTime);
+            soundManager.PlaySoundFX(Sound.SHRINK, Channel.PLATFORM);
         }
     }
+
+    private void Grow()
+    {
+        if (transform.localScale.x < originalScale.x || transform.localScale.y < originalScale.y)
+        {
+            transform.localScale = new Vector3(transform.localScale.x + shrinkFactor * shrinkSpeed * Time.deltaTime,
+                                            transform.localScale.y + shrinkFactor * shrinkSpeed * Time.deltaTime);
+            soundManager.PlaySoundFX(Sound.GROW, Channel.PLATFORM);
+        }
+    }
+
 
 
 }

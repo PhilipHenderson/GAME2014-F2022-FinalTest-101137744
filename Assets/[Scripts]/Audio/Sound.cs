@@ -8,6 +8,9 @@ public enum Sound
     HURT,
     DEATH,
     BULLET,
+    GROW,
+    SHRINK,
+    GEM,
     MAIN_MUSIC,
     END_MUSIC
 }
